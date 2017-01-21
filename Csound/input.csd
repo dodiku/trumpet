@@ -1,10 +1,22 @@
 <CsoundSynthesizer>
+<CsOptions>
+-i adc2
+-+rtaudio="CoreAudio"
+--realtime
+; -iadc3, -iadc:hw:0
+; -iadc:hw:0,
+; -iadc3, -iadc:hw:0
+</CsOptions>
 <CsInstruments>
 sr     = 44100
 kr     = 4410
 ksmps  = 10
 nchnls = 2
 0dbfs = 1.0
+
+
+
+
 
 gaping = 0
 gaguitar = 0
@@ -36,7 +48,7 @@ instr 100
 
 aping = gaping
 ; aguitar = gaguitar
-out aout;, gaguitar
+out aping;, gaguitar
 ; gaping = 0
 
 endin
