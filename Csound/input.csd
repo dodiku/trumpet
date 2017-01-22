@@ -19,6 +19,7 @@ nchnls = 2
 
 
 gaping = 0
+
 gaguitar = 0
 
 
@@ -38,13 +39,56 @@ gaping = ares
 
 endin
 
-instr	99	;ALWAYS ON - SEE SCORE
-ainL, ainR	ins				;READ STEREO INPUT FROM THE COMPUTERS AUDIO INPUT
-outs	ainL , ainR 	;SEND AUDIO TO STEREO OUTPUT AND APPLY gkgain RESCALING
-		; gaguitar = ainL + ainR
+
+instr 102
+
+; iduration = 2
+iamplitude = p4
+iattack = 0.001
+iduration = p3
+ifreq = p5
+
+
+; aenv linseg 0, iduration * iattack, iamplitude, iduration * ( 1 - iattack ), 0
+ares poscil3 iamplitude, ifreq, 1
+; ares moogvcf ares, 2000, 0.2
+outs ares, ares
+
 endin
 
-instr 100
+
+instr	99	;guitar input
+
+ainL, ainR	ins	
+
+ain = (ainL + ainR)*0.5
+
+ktresh rms ain
+
+;checking the volume
+if(ktresh > 0.01 && ktresh < 0.0101) then
+	aenv adsr 0.1, 4, 10, 10
+	; gaguitar = aafterenv
+
+	ifftsize = 1024*16
+	iwtype = 1    /* cleaner with hanning window */
+	fsig pvsanal   ain, ifftsize, ifftsize/4, ifftsize, iwtype
+	kfreq, kamp pvspitch   fsig, 0.01
+	printk 0, kfreq*4
+	printk 0, kamp*10
+	event "i", 102, 0, 5, kamp*5, kfreq*4
+
+
+endif
+endin
+
+instr 5
+
+endin
+
+instr 100 ;mixer
+
+
 
 aping = gaping
 ; aguitar = gaguitar
@@ -68,6 +112,7 @@ i 101	0	0.5
 i 101	+	0.5
 i 101	+	0.5
 i 101	+	0.5
+
 
 
 

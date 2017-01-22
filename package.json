@@ -1,0 +1,23 @@
+{
+  "name": "upper_west",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dodiku/upper_west.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dodiku/upper_west/issues"
+  },
+  "homepage": "https://github.com/dodiku/upper_west#readme",
+  "dependencies": {
+    "csound-api": "^0.9.4",
+    "twit": "^2.2.5"
+  }
+}
