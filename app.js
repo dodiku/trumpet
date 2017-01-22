@@ -100,7 +100,7 @@ var stream = T.stream('statuses/filter', { track: 'trump protest' }, { locations
 count = 0;
 stream.on('tweet', function (tweet) {
   //Log the tweet
-  console.log(tweet.text);
+  console.log('\x1b[36m%s\x1b[0m', tweet.text);
   //
   // if(Csound !== undefined){
   // csound.ScoreEvent(Csound, "i"[1, 2, 1, 0.1]);
